@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="myApp" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><style type="text/css">[uib-typeahead-popup].dropdown-menu{display:block;}</style><style type="text/css">.uib-time input{width:50px;}</style><style type="text/css">[uib-tooltip-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-popup].tooltip.right-bottom > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.right-bottom > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.right-bottom > .tooltip-arrow,[uib-popover-popup].popover.top-left > .arrow,[uib-popover-popup].popover.top-right > .arrow,[uib-popover-popup].popover.bottom-left > .arrow,[uib-popover-popup].popover.bottom-right > .arrow,[uib-popover-popup].popover.left-top > .arrow,[uib-popover-popup].popover.left-bottom > .arrow,[uib-popover-popup].popover.right-top > .arrow,[uib-popover-popup].popover.right-bottom > .arrow,[uib-popover-html-popup].popover.top-left > .arrow,[uib-popover-html-popup].popover.top-right > .arrow,[uib-popover-html-popup].popover.bottom-left > .arrow,[uib-popover-html-popup].popover.bottom-right > .arrow,[uib-popover-html-popup].popover.left-top > .arrow,[uib-popover-html-popup].popover.left-bottom > .arrow,[uib-popover-html-popup].popover.right-top > .arrow,[uib-popover-html-popup].popover.right-bottom > .arrow,[uib-popover-template-popup].popover.top-left > .arrow,[uib-popover-template-popup].popover.top-right > .arrow,[uib-popover-template-popup].popover.bottom-left > .arrow,[uib-popover-template-popup].popover.bottom-right > .arrow,[uib-popover-template-popup].popover.left-top > .arrow,[uib-popover-template-popup].popover.left-bottom > .arrow,[uib-popover-template-popup].popover.right-top > .arrow,[uib-popover-template-popup].popover.right-bottom > .arrow{top:auto;bottom:auto;left:auto;right:auto;margin:0;}[uib-popover-popup].popover,[uib-popover-html-popup].popover,[uib-popover-template-popup].popover{display:block !important;}</style><style type="text/css">.uib-datepicker-popup.dropdown-menu{display:block;float:none;margin:0;}.uib-button-bar{padding:10px 9px 2px;}</style><style type="text/css">.uib-position-measure{display:block !important;visibility:hidden !important;position:absolute !important;top:-9999px !important;left:-9999px !important;}.uib-position-scrollbar-measure{position:absolute !important;top:-9999px !important;width:50px !important;height:50px !important;overflow:scroll !important;}.uib-position-body-scrollbar-measure{overflow:scroll !important;}</style><style type="text/css">.uib-datepicker .uib-title{width:100%;}.uib-day button,.uib-month button,.uib-year button{min-width:100%;}.uib-left,.uib-right{width:100%}</style><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+
+    <title>健康测评系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="/home/zj/work/fbe-selfheath/app/view/resourcefiles/bootstrap.min.css">
+    <link rel="stylesheet" href="/home/zj/work/fbe-selfheath/app/view/resourcefiles/swiper.min.css">
+    <link rel="stylesheet" href="/home/zj/work/fbe-selfheath/app/view/resourcefiles/alertify.css" id="alertifyCSS">
+    <link rel="stylesheet" href="/home/zj/work/fbe-selfheath/app/view/resourcefiles/tqqStyle.css">
+</head>
+<body>
+
+<!-- uiView: --><div ui-view="" class="ng-scope"><div class="reportPage ng-scope">
+    <div class="container">
+        <div class="row">
+            <div class="loginPage history report">
+                <div class="col-xs-4 clickPage reporttu glyphicon glyphicon-remove" ui-sref="history"></div>
+                <div class="col-xs-6">
+                    <img src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/logo.png">
+                    <span>|</span>
+                    <p class="ng-binding">{{vm.questionnaireName}}</p>
+                </div>
+                <div class="col-xs-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="reportcontent ng-scope">
+    <h2 class="ng-binding">{{vm.data.header.name}}</h2>
+    <div class="container" style="width:100%">
+        <div class="row">
+            <div class="message">
+                <div class="col-xs-6 hhleft">
+                    <div class="ding">
+                        <i class="glyphicon glyphicon-stop"></i>
+                        <p class="alignLeft ng-binding"><span>身份证号码</span>：{{vm.data.personalInfo.ID}}</p>
+                    </div>
+                    <div class="ding">
+                        <i class="glyphicon glyphicon-stop"></i>
+                        <p class="alignLeft ng-binding"><span>工作单位</span>：{{vm.data.personalInfo.company}}</p>
+                    </div>
+                    <div class="ding">
+                        <i class="glyphicon glyphicon-stop"></i>
+                        <p class="alignLeft ng-binding"><span>姓名</span>：{{vm.data.personalInfo.name}}</p>
+                    </div>
+                </div>
+                <div class="col-xs-6 ">
+                    <div class="ding">
+                        <i class="glyphicon glyphicon-stop"></i>
+                        <p class="alignLeft ng-binding"><span>测评时间</span>：{{vm.data.personalInfo.testTime}}</p>
+                    </div>
+                    <div class="ding">
+                        <i class="glyphicon glyphicon-stop"></i>
+                        <p class="alignLeft ng-binding"><span>年龄</span>：{{vm.data.personalInfo.age}}</p>
+                    </div>
+                    <div class="ding">
+                        <i class="glyphicon glyphicon-stop"></i>
+                        <p class="alignLeft ng-binding"><span>性别</span>：{{vm.data.personalInfo.gender}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="recontent">
+        <p>首先恭喜您已经向健康自我管理跨出了坚实的一步，您是自己身体的“大管家”，身体健康不仅是享受生活的基础，也是对您一份积累，一分收获的最佳回报！</p>
+    </div>
+    <div class="reportOne">
+        <div class="reporto1">
+            <div class="reporto2">
+                一.综合健康状况评估
+            </div>
+        </div>
+        <p class="wen">通过对您家族史，健康史，现病史和最近几个月躯体和心理等方面的自我测量和加权分析。</p>
+        <div>
+            <h4>您目前的健康综合评估指数是
+            </h4>
+            <div class="yuan">1</div>
+            。（1-5，级别越高越差）。
+        </div>
+        <div class="Level borderLevel">
+            <div class="col-xs-2 borderimgs">
+                <div class="hh-border">
+                    <img src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/number_03.png" alt="">
+                </div>
+            </div>
+            <div class="col-xs-2 borderimgs">
+                <img src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/number_05.png" alt=""></div>
+            <div class="col-xs-2 borderimgs">
+                <img src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/number_07.png" alt=""></div>
+            <div class="col-xs-2 borderimgs">
+                <img src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/number_09.png" alt=""></div>
+            <div class="col-xs-2 borderimgs">
+                <img src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/number_11.png" alt=""></div>
+        </div>
+        <div class="Result">
+            <p class="wen">目前您的综合健康状况：<span class="you">优</span>。恭喜您！这代表您目前的健康状况很不错！不存在不良躯体症状或心理问题，精神压力适可，睡眠质量也还可以，生活方式和作息习惯相对比较优良，同时，您有良好的健康素养，具有丰富的健康知识，希望您继续保持。
+            </p>
+        </div>
+    </div>
+    <div class="reportOne">
+        <div class="reporto1">
+            <div class="reporto2">
+                二.各维度健康状况评估
+            </div>
+        </div>
+        <div class="ge">
+            <h3>各维度健康状况评估结果如下：</h3>
+            <div class="Level Levels">
+                <div class="col-xs-2"></div>
+                <!-- ngRepeat: li in vm.sections -->
+            </div>
+            <div class="Result">
+                <p class="jingjie">注：
+                    <i class="glyphicon glyphicon-stop stop"></i>
+                    <span class="colo">绿色</span>
+                    为理想区域，
+                    <i class="glyphicon glyphicon-stop stop"></i>
+                    <span class="colo">黄色</span>
+                    为警示区域，
+                    <i class="glyphicon glyphicon-stop stop"></i>
+                    <span class="colo">红色</span>
+                    需要尽快干预。
+                </p>
+            </div>
+        </div>
+        <div class="Level Levels">
+            <h3 class="zhu yao">主要风险因素</h3>
+        </div>
+        <div class="tab">
+            <!-- ngRepeat: ul in vm.sections -->
+        </div>
+    </div>
+    <div class="reportOne">
+        <div class="reporto1">
+            <div class="reporto2">
+                三.主要健康问题
+            </div>
+        </div>
+        <div>
+            <h3 class="zhu">主要疾病：<span class="xian">现病史中选择。</span></h3>
+            <div class="Level Levels">
+                <h3 class="zhu">主要疾病健康问题</h3>
+            </div>
+            <div class="Result">
+                <div class="resultcontent">
+                    <h3>不良健康史</h3>
+                    <span>：您无不良健康史</span>
+                </div>
+                <div class="resultcontent">
+                    <h3>躯体症状</h3>
+                    <span>：您目前的身体状况良好，无不适症状，请继续保持！</span>
+                </div>
+                <div class="resultcontent">
+                    <h3>生活习惯</h3>
+                    <span>：您目前存在部分不良生活习惯；牛奶摄入不足；水果摄入不足；体力活动不足，静坐生活方式，建议您进行调整。</span>
+                </div>
+                <div class="resultcontent">
+                    <h3>精神压力</h3>
+                    <span>：您目前的精神状态很好，请继续保持！</span>
+                </div>
+                <div class="resultcontent">
+                    <h3>睡眠质量</h3>
+                    <span>：您的睡眠质量较好。良好的睡眠会让您精神饱满，充满活力，请继续保持！</span>
+                </div>
+                <div class="resultcontent">
+                    <h3>健康素养</h3>
+                    <span>：您的健康素养一般，请您加强健康知识的学习和储备！</span>
+                </div>
+            </div>
+            <div class="Level Levels">
+                <h3 class="zhu yao">主要风险因素</h3>
+            </div>
+            <div class="tab">
+                <div class="tables">
+                    <div class="col-xs-3">风险因素</div>
+                    <div class="col-xs-3">问卷结果</div>
+                    <div class="col-xs-3">理想状态</div>
+                    <div class="col-xs-3">建议</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-3">年龄</div>
+                    <div class="col-xs-3">27.3</div>
+                    <div class="col-xs-4">随着年龄增加风险升高</div>
+                    <div class="col-xs-2">--</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-3">高血压家族史</div>
+                    <div class="col-xs-3">有</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">--</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-3">体重指数()</div>
+                    <div class="col-xs-3">21.5</div>
+                    <div class="col-xs-4">18.5-23.9</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-3">饮食状况</div>
+                    <div class="col-xs-3">饮食清淡</div>
+                    <div class="col-xs-4">饮食清淡</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-3">吸烟状况</div>
+                    <div class="col-xs-3">不吸烟</div>
+                    <div class="col-xs-4">不吸烟，无被动吸烟或已戒烟</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-3">饮酒状况</div>
+                    <div class="col-xs-3">不饮酒</div>
+                    <div class="col-xs-4">不饮酒，少量饮酒或已戒酒</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-3">体力活动水平</div>
+                    <div class="col-xs-3">不足</div>
+                    <div class="col-xs-4">中等或充足</div>
+                    <div class="col-xs-2">加强运动锻炼</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-3">静坐生活方式</div>
+                    <div class="col-xs-3">是</div>
+                    <div class="col-xs-4">否</div>
+                    <div class="col-xs-2">加强运动锻炼</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-3">精神压力</div>
+                    <div class="col-xs-3">无</div>
+                    <div class="col-xs-4">无或适中</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reportOne">
+        <div class="reporto1">
+            <div class="reporto2">
+                四.四种疾病健康风险评估
+            </div>
+        </div>
+        <div class="sickness">
+            <div class="Level Levels Level1">
+                <div class="yuan"></div>
+                <h3 class="zhu zhu1">冠心病</h3>
+            </div>
+            <div class="Result Results">
+                <div class="resultcontent">
+                    <span>冠心病风险评估</span>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;冠心病是指冠状动脉粥样硬化引起的一类心脏疾病。冠心病的主要危险因素为高血
+                        压、血脂异常、吸烟、糖代谢异常、超重和肥胖、缺少运动和心理压力等。资料表明，高 血压者心肌梗死的发病危险是血压正常者的2-3倍；吸烟者冠心病和心肌梗死的风险增加
+                        3-4倍；血脂异常显著增加冠心病发病危险；超重和肥胖者与正常体重者相比冠心病发病和死亡的相对危险度为1.5-2.0；糖尿病患者与血糖正常者相比，冠心病发病相对危险度 为3.0-3.5。</p>
+                </div>
+            </div>
+            <div class="Level Levels Level1 jieguo">
+                <div class="yuan"></div>
+                <span>冠心病风险评估结果</span>
+            </div>
+            <div class="rewei">
+                <h4>风险等级：低危 </h4>
+            </div>
+            <div class="Result Results">
+                <div class="resultcontent">
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本次自测自评发现您的冠心病风险等级得分为 1.95，您的最佳状态分值应该为 0.19
+                        。您目前存在导致冠心病的风险因素，建议您参照风险因素调查结果和预防建议，积极调整。</p>
+                </div>
+            </div>
+            <div class="Level Levels Level1 jieguo">
+                <div class="yuan"></div>
+                <span>主要风险因素调查结果</span>
+            </div>
+            <div class="Result Results">
+                <div class="resultcontent resultcontents">
+                    <p>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据您的调查问卷，您目前存在的主要风险因素包括下表所列条目，请您重点关注，通过有效控制，降低您冠心病的危险。</p>
+                </div>
+            </div>
+            <div class="tab">
+                <div class="tables">
+                    <div class="col-xs-3">风险因素</div>
+                    <div class="col-xs-3">问卷结果</div>
+                    <div class="col-xs-3">理想状态</div>
+                    <div class="col-xs-3">建议</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">年龄</div>
+                    <div class="col-xs-2">27.3</div>
+                    <div class="col-xs-4">随着年龄增加风险升高</div>
+                    <div class="col-xs-2">--</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">早发心血管病家族史</div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">--</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">体重指数(BMI)</div>
+                    <div class="col-xs-2">21.5</div>
+                    <div class="col-xs-4">18.5-23.9</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">高血压病史</div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">糖尿病史/糖耐量受损或 空腹血糖受损
+                    </div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">血脂异常</div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">高脂饮食</div>
+                    <div class="col-xs-2">否</div>
+                    <div class="col-xs-4">否</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">吸烟状况</div>
+                    <div class="col-xs-2">不吸烟</div>
+                    <div class="col-xs-4">不吸烟，无被动吸烟或已戒烟</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">体力活动水平</div>
+                    <div class="col-xs-2">不足</div>
+                    <div class="col-xs-4">中等或充足</div>
+                    <div class="col-xs-2">加强运动锻炼</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">静坐生活方式</div>
+                    <div class="col-xs-2">是</div>
+                    <div class="col-xs-4">否</div>
+                    <div class="col-xs-2">加强运动锻炼</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">精神压力</div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无或适中</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+            </div>
+        </div>
+        <div class="sickness">
+            <div class="Level Levels Level1">
+                <div class="yuan"></div>
+                <h3 class="zhu zhu1">高血压</h3>
+            </div>
+            <div class="Result Results">
+                <div class="resultcontent">
+                    <span>高血压病风险评估</span>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高血压是最常见的慢性非传染性疾病，也是心血管病最重要的危险因素。血压指血管
+                        内的血液对于单位面积血管壁的侧压力，即压强，通常所说的血压是指动脉血压。高血压 的定义是指收缩压≥140mmHg和（或）舒张压≥90mmHg。根据血压水平分为正常血压、正
+                        常高值血压和1、2、3级高血压和单纯收缩期高血压。健康管理对血压危险性的评估还要 考虑血压水平、心血管危险因素、靶器官损害、临床并发症和其它疾病如糖尿病等。</p>
+                </div>
+            </div>
+            <div class="Level Levels Level1 jieguo">
+                <div class="yuan"></div>
+                <span>高血压风险评估结果</span>
+            </div>
+            <div class="rewei">
+                <h4>风险等级：低危 </h4>
+            </div>
+            <div class="Result Results">
+                <div class="resultcontent">
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;测评结果显示您的高血压风险等级得分为 4.68，您的最佳状态分值应该为 3.42 。
+                        您目前存在导致高血压的风险因素，建议您参照风险因素调查结果和预防建议，积极调 整。 </p>
+                </div>
+            </div>
+            <div class="Level Levels Level1 jieguo">
+                <div class="yuan"></div>
+                <span>主要风险因素调查结果</span>
+            </div>
+            <div class="Result Results">
+                <div class="resultcontent resultcontents">
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据您的调查问卷，您目前存在的主要风险因素包括下表所列条目，请您重点关
+                        注，通过有效控制，降低您高血压的危险。</p>
+                </div>
+            </div>
+            <div class="tab">
+                <div class="tables">
+                    <div class="col-xs-3">风险因素</div>
+                    <div class="col-xs-3">问卷结果</div>
+                    <div class="col-xs-3">理想状态</div>
+                    <div class="col-xs-3">建议</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">年龄</div>
+                    <div class="col-xs-2">27.3</div>
+                    <div class="col-xs-4">随着年龄增加风险升高</div>
+                    <div class="col-xs-2">--</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">高血压家族史</div>
+                    <div class="col-xs-2">有</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">--</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">体重指数(BMI)</div>
+                    <div class="col-xs-2">21.5</div>
+                    <div class="col-xs-4">18.5-23.9</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">饮食状况</div>
+                    <div class="col-xs-2">饮食清淡</div>
+                    <div class="col-xs-4">饮食清淡</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">吸烟状况</div>
+                    <div class="col-xs-2">不吸烟</div>
+                    <div class="col-xs-4">不吸烟，无被动吸烟或已戒烟</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">饮酒状况</div>
+                    <div class="col-xs-2">不饮酒</div>
+                    <div class="col-xs-4">不饮酒，少量饮酒或已戒酒</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">体力活动水平</div>
+                    <div class="col-xs-2">不足</div>
+                    <div class="col-xs-4">中等或充足</div>
+                    <div class="col-xs-2">加强运动锻炼</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">静坐生活方式</div>
+                    <div class="col-xs-2">是</div>
+                    <div class="col-xs-4">否</div>
+                    <div class="col-xs-2">加强运动锻炼</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">精神压力</div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无或适中</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+            </div>
+        </div>
+        <div class="sickness">
+            <div class="Level Levels Level1">
+                <div class="yuan"></div>
+                <h3 class="zhu zhu1">糖尿病</h3>
+            </div>
+            <div class="Result Results">
+                <div class="resultcontent">
+                    <span>糖尿病风险评估</span>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;糖尿病是一种以高血糖为特征的代谢性疾病。糖尿病是可防可治的疾病，合理膳
+                        食，科学运动，养成良好的生活方式，定期监测血糖并积极治疗，每一个糖尿病患者都可 以享受到正常人一样的美好生活。改善糖尿病伴随的代谢方面的异常，体育运动和饮食治
+                        疗是主要的治疗方法。糖尿病患者的运动治疗应该坚持因人而异，循序渐进，贵在坚持。 饮食治疗应该注重出入平衡，量需而入，量体择食。 </p>
+                </div>
+            </div>
+            <div class="Level Levels Level1 jieguo">
+                <div class="yuan"></div>
+                <span>糖尿病风险评估结果</span>
+            </div>
+            <div class="rewei">
+                <h4>风险等级：低危 </h4>
+            </div>
+            <div class="Result Results">
+                <div class="resultcontent">
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本次自测自评发现您的糖尿病风险等级得分为4.21，您的最佳状态分值应该为3.20。
+                    </p>
+                    <p>
+                        <span>您目前存在导致糖尿病的风险因素，建议您参照风险因素调查结果和预防建议，积极调整。
+                    </span>
+                    </p>
+                </div>
+            </div>
+            <div class="Level Levels Level1 jieguo">
+                <div class="yuan"></div>
+                <span>主要风险因素调查结果</span>
+            </div>
+            <div class="Result Results">
+                <div class="resultcontent resultcontents">
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据您的调查问卷，您目前存在的主要风险因素包括下表所列条目，请您重点关
+                        注，通过有效控制，降低您糖尿病的危险。</p>
+                </div>
+            </div>
+            <div class="tab">
+                <div class="tables">
+                    <div class="col-xs-3">风险因素</div>
+                    <div class="col-xs-3">问卷结果</div>
+                    <div class="col-xs-3">理想状态</div>
+                    <div class="col-xs-3">建议</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">年龄</div>
+                    <div class="col-xs-2">27.3</div>
+                    <div class="col-xs-4">随着年龄增加风险升高</div>
+                    <div class="col-xs-2">--</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">糖尿病家族史</div>
+                    <div class="col-xs-2">有</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">--</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">体重指数(BMI)</div>
+                    <div class="col-xs-2">21.5</div>
+                    <div class="col-xs-4">18.5-23.9</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">高血压病史</div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">糖尿病史/糖耐量受损或 空腹血糖受损
+                    </div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">血脂异常</div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">高脂饮食</div>
+                    <div class="col-xs-2">否</div>
+                    <div class="col-xs-4">否</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">吸烟状况</div>
+                    <div class="col-xs-2">不吸烟</div>
+                    <div class="col-xs-4">不吸烟，无被动吸烟或已戒烟</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">体力活动水平</div>
+                    <div class="col-xs-2">不足</div>
+                    <div class="col-xs-4">中等或充足</div>
+                    <div class="col-xs-2">加强运动锻炼</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">静坐生活方式</div>
+                    <div class="col-xs-2">是</div>
+                    <div class="col-xs-4">否</div>
+                    <div class="col-xs-2">加强运动锻炼</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">精神压力</div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无或适中</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+            </div>
+        </div>
+        <div class="sickness">
+            <div class="Level Levels Level1">
+                <div class="yuan"></div>
+                <h3 class="zhu zhu1">脑卒中</h3>
+            </div>
+            <div class="Result Results">
+                <div class="resultcontent">
+                    <span>脑卒中（中风）风险评估</span>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;脑卒中（Stroke）是脑中风的学名，是一种突然起病的脑血液循环障碍性疾病。又名
+                        脑血管意外。指因各种诱发因素引起脑内动脉狭窄，闭塞或破裂，而造成急性脑血液循环 障碍，临床上表现为一过性或永久性脑功能障碍的症状和体征．脑卒中分为缺血性脑卒中
+                        和出血性脑卒中。无论是出血性中风还是缺血性中风，高血压是最主要的独立危险因 素，糖尿病、冠心病、血脂代谢异常等疾病也与脑卒中的发生有一定的关系。</p>
+                </div>
+            </div>
+            <div class="Level Levels Level1 jieguo">
+                <div class="yuan"></div>
+                <span>脑卒中风险评估结果</span>
+            </div>
+            <div class="rewei">
+                <h4>风险等级：低危 </h4>
+            </div>
+            <div class="Result Results">
+                <div class="resultcontent">
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本次自测自评发现您的脑卒中风险等级得分为 2.23，您的最佳状态分值应该为 0.48
+                        。您目前存在导致脑卒中的风险因素，建议您参照风险因素调查结果和预防建议，积极调 整。 </p>
+                </div>
+            </div>
+            <div class="Level Levels Level1 jieguo">
+                <div class="yuan"></div>
+                <span>主要风险因素调查结果</span>
+            </div>
+            <div class="Result Results">
+                <div class="resultcontent resultcontents">
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据您的调查问卷，您目前存在的主要风险因素包括下表所列条目，请您重点关
+                        注，通过有效控制，降低您脑卒中的危险。 </p>
+                </div>
+            </div>
+            <div class="tab tab1">
+                <div class="tables">
+                    <div class="col-xs-3">风险因素</div>
+                    <div class="col-xs-3">问卷结果</div>
+                    <div class="col-xs-3">理想状态</div>
+                    <div class="col-xs-3">建议</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">年龄</div>
+                    <div class="col-xs-2">27.3</div>
+                    <div class="col-xs-4">随着年龄增加风险升高</div>
+                    <div class="col-xs-2">--</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">早发脑卒中家族史</div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">--</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">体重指数(BMI)</div>
+                    <div class="col-xs-2">21.5</div>
+                    <div class="col-xs-4">18.5-23.9</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">高血压病史</div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">糖尿病史/糖耐量受损或 空腹血糖受损
+                    </div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">血脂异常</div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">高脂饮食</div>
+                    <div class="col-xs-2">否</div>
+                    <div class="col-xs-4">否</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">吸烟状况</div>
+                    <div class="col-xs-2">不吸烟</div>
+                    <div class="col-xs-4">不吸烟，无被动吸烟或已戒烟</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">体力活动水平</div>
+                    <div class="col-xs-2">不足</div>
+                    <div class="col-xs-4">中等或充足</div>
+                    <div class="col-xs-2">加强运动锻炼</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">静坐生活方式</div>
+                    <div class="col-xs-2">是</div>
+                    <div class="col-xs-4">否</div>
+                    <div class="col-xs-2">加强运动锻炼</div>
+                </div>
+                <div class="tables tabs">
+                    <div class="col-xs-4">精神压力</div>
+                    <div class="col-xs-2">无</div>
+                    <div class="col-xs-4">无或适中</div>
+                    <div class="col-xs-2">继续保持</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div></div>
+<script src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/jquery.min.js"></script>
+<script src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/swiper.min.js"></script>
+<script src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/angular.js"></script>
+<script src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/angular-ui-router.min.js"></script>
+<script src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/ui-bootstrap-tpls.js"></script>
+<script src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/ngAlertify.js"></script>
+<script src="/home/zj/work/fbe-selfheath/app/view/resourcefiles/my.js"></script>
+
+</body></html>

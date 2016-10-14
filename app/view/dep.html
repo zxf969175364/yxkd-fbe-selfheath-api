@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)http://localhost:8070/#/Report -->
+<html lang="zh" class="ng-scope">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>健康测评系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!--<link rel="stylesheet" href="./dep/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="./dep/production.min.css">-->
+    <!--<link rel="stylesheet" href="./dep/tqqStyle.css">-->
+    <!--<link rel="stylesheet" href="/Users/zjp/WebstormProjects/fbe-selfheath/app/view/dep/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/Users/zjp/WebstormProjects/fbe-selfheath/app/view/dep/production.min.css">-->
+    <!--<link rel="stylesheet" href="/Users/zjp/WebstormProjects/fbe-selfheath/app/view/dep/tqqStyle.css">-->
+
+    <link rel="stylesheet" href="/home/zj/work/fbe-selfheath/app/view/dep/bootstrap.min.css">
+    <link rel="stylesheet" href="/home/zj/work/fbe-selfheath/app/view/dep/production.min.css">
+    <link rel="stylesheet" href="/home/zj/work/fbe-selfheath/app/view/dep/tqqStyle.css">
+</head>
+<body>
+<div ui-view="" class="ng-scope">
+    <div class="reportPage ng-scope">
+        <div class="report">
+            <p>健康风险自测自评报告</p>
+        </div>
+    </div>
+    <div class="reportcontent ng-scope">
+        <div class="container clearfix">
+            <div class="yyLeft">
+                <div class="ding">
+                    <p class="alignLeft"><span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span>：{{report.personalInfo.name}}
+                    </p>
+                </div>
+                <div class="ding">
+                    <p class="alignLeft"><span>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄</span>：{{report.personalInfo.age}}
+                    </p>
+                </div>
+                <div class="ding">
+                    <p class="alignLeft"><span>身份证号</span>：{{report.personalInfo.ID}}</p>
+                </div>
+            </div>
+            <div class="yyRight ">
+                <div class="ding">
+                    <p class="alignLeft"><span>测评时间</span>：{{report.personalInfo.testTime}}</p>
+                </div>
+                <div class="ding">
+                    <p class="alignLeft"><span>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</span>：{{report.personalInfo.gender}}
+                    </p>
+                </div>
+                <div class="ding">
+                    <p class="alignLeft"><span>工作单位</span>：{{report.personalInfo.company}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="recontent">
+            <p>　　首先恭喜您已经向健康自我管理跨出了坚实的一步，您是自己身体的“大管家”，身体健康不仅是享受生活的基础，也是对您一份积累、一分收获的最佳回报！</p>
+        </div>
+        <div class="reportOne">
+            <div class="reporto1">
+                <div class="reporto2">
+                    综合健康状况评估
+                </div>
+            </div>
+            <div class="yyReportline"></div>
+            <p class="wen">　　通过对您家族史、健康史、现病史和最近几个月躯体和心理等方面的自我测量和加权分析。</p>
+            <div class="mu  clearfix">
+                <h4>　　您目前的健康综合评估指数是</h4>
+                <div class="yuan">{{report.summary.level}}</div>
+                <h4>级。</h4>
+                <div class="yy_dan">（1-5，级别越高风险越高）。</div>
+            </div>
+            <div class="Level borderLevel">
+                <div class="yy_Level clearfix"></div>
+                <div class="yy1 clearfix">
+                    {% if report.summary.level == "1" %}
+                    <div style="color: #38AF6B">
+                        {% else %}
+                        <div>
+                            {% endif %}
+                            <i class="iconfont"></i><br>
+                            <i class="iconfont"></i><br>
+                            <span>（优）</span>
+                        </div>
+                        {% if report.summary.level == "2" %}
+                        <div style="color: #38AF6B">
+                            {% else %}
+                            <div>
+                                {% endif %}
+                                <i class="iconfont"></i><br>
+                                <i class="iconfont"></i><br>
+                                <span>（良）</span>
+                            </div>
+                            {% if report.summary.level == "3" %}
+                            <div style="color: #38AF6B">
+                                {% else %}
+                                <div>
+                                    {% endif %}
+                                    <i class="iconfont"></i><br>
+                                    <i class="iconfont"></i><br>
+                                    <span>（一般）</span>
+                                </div>
+                                {% if report.summary.level == "4" %}
+                                <div style="color: #38AF6B">
+                                    {% else %}
+                                    <div>
+                                        {% endif %}
+                                        <i class="iconfont"></i><br>
+                                        <i class="iconfont"></i><br>
+                                        <span>（低危）</span>
+                                    </div>
+                                    {% if report.summary.level == "5" %}
+                                    <div style="color: #38AF6B">
+                                        {% else %}
+                                        <div>
+                                            {% endif %}
+                                            <i class="iconfont"></i><br>
+                                            <i class="iconfont"></i><br>
+                                            <span>（高危）</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="yy_illness">
+                                    <p class="wen">　　目前您的综合健康状况：<span class="you">{{report.summary.levelName}}</span>。</p>
+                                    <span class="yyNess">　　{{report.summary.desc}}</span>
+                                </div>
+                            </div>
+                            <div class="reportOne clearfix">
+                                <div class="reporto1">
+                                    <div class="reporto2">
+                                        各维度健康状况评估
+                                    </div>
+                                </div>
+                                <div class="yyReportline"></div>
+                                <div class="ge">
+                                    <div class="yy_Body">
+                                        <div>
+                                            {% for v in report.sections %}
+                                            {% if v.index %}
+
+                                            <img src={{v.src}}
+                                                 alt="">
+
+                                            {% endif %}
+
+                                            {% endfor %}
+                                        </div>
+                                        <div class="yy_rank clearfix">
+                                            {% for v in report.sections %}
+                                            {% if v.index %}
+                                            <div>
+                                                <span>{{v.sectionName}}</span><br>
+                                                <span>{{v.level}}级</span>
+                                            </div>
+                                            {% endif %}
+
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                    <div class="yyJingjie">
+                                        <p class="jingjie">注：
+                                            <i class="glyphicon glyphicon-stop stop"></i>
+                                            <span class="colo">绿色</span>
+                                            为理想区域，
+                                            <i class="glyphicon glyphicon-stop stop"></i>
+                                            <span class="colo">黄色</span>
+                                            为警示区域，
+                                            <i class="glyphicon glyphicon-stop stop"></i>
+                                            <span class="colo">红色</span>
+                                            需要尽快干预。
+                                        </p>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="Result">
+                                    {% for v in report.sections %}
+                                    {% if v.index %}
+                                    <div class="resultcontent clearfix">
+                                        <div class="yyResult">
+                                            {{v.sectionName}}：
+                                        </div>
+                                        <span>{{v.info}}</span>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="reportOne">
+                                <div class="reporto1">
+                                    <div class="reporto2">
+                                        疾病风险评估
+                                    </div>
+                                </div>
+                                <div class="yyReportline"></div>
+                                {% for v in report.disease%}
+                                <div class="sickness">
+                                    <div class="jieguo">
+                                        <div class="yy_yuan"></div>
+                                        <span>{{v.diseaseName}}风险评估</span>
+                                    </div>
+                                    <div class="yyIntro">
+                                        <p>{{v.define}}</p>
+                                    </div>
+                                    <div class="yyJie">
+                                        <div class="rewei">
+                                            风险等级：{{v.levelName}}
+                                        </div>
+                                        <div class="Results">
+                                            <p>本次自测自评发现您的{{v.diseaseName}}风险等级得分为 {{v.score}}，您的最佳状态分值应该为 {{v.bestScore}}
+                                                。{{v.desc}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="reportOne">
+                                <div class="reporto1">
+                                    <div class="reporto2">
+                                        主要风险因素分析
+                                    </div>
+                                </div>
+                                <div class="yyReportline"></div>
+                                <div class="tab">
+                                    <p>　　根据您的调查问卷，您目前存在的主要风险因素包括下表所列条目，请您重点关注，通过有效的控制，降低您患病的风险。</p>
+                                    <div class="yy_tables">
+                                        <div class="tables">
+                                            <div class="col-xs-3 text-center">风险因素</div>
+                                            <div class="col-xs-3 text-center">问卷结果</div>
+                                            <div class="col-xs-3 text-center">理想状态</div>
+                                            <div class="col-xs-3 text-center">建议</div>
+                                        </div>
+                                        {% for v in report.risk %}
+                                        <div class="tables tabs">
+                                            <div >{{v.No}}{{v.risk}}</div>
+                                            <div >{{v.result}}</div>
+                                            <div >{{v.ideal}}</div>
+                                            <div >{{v.advice}}</div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</body>
+</html>
